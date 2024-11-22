@@ -22,8 +22,7 @@ class StrawberryStore2 {
                 throw IllegalArgumentException("Wrong bill: $bill, only $allowedBills Euro allowed")
             }
 
-            val bankIndex = bill / 10
-            bank[bankIndex]++
+            bank[bill / 10]++
 
             var change = bill - PRICE
 
