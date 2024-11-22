@@ -37,8 +37,8 @@ class StrawberryStore(allowedBills: IntArray = intArrayOf(5, 10, 20)) {
             }
             if (change > 0) return false
 
-            for ((i, n) in decreasingBills.withIndex()) {
-                bank[n] = bank[n]!! - debitBills[i]
+            for ((i, currBill) in decreasingBills.withIndex()) {
+                bank[currBill] = bank[currBill]!! - debitBills[i]
             }
         }
         return true
