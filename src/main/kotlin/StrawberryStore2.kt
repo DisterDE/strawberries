@@ -12,6 +12,7 @@ class StrawberryStore2 {
     private val bank = IntArray(3)
 
     fun buy(bills: IntArray): Boolean {
+        require(bills.isNotEmpty()) { "No bills" }
         for (bill in bills) {
             when (bill) {
                 5 -> bank[0]++
