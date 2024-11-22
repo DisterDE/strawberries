@@ -31,7 +31,7 @@ class StrawberryStoreTest2 {
         val bill = 50
         val e = assertThrows<IllegalArgumentException> { gs.buy(intArrayOf(bill)) }
         assertEquals(
-            "Wrong bill: $bill, only 5, 10 and 20 Euro allowed",
+            "Wrong bill: $bill, only [5, 10, 20] Euro allowed",
             e.message
         )
     }

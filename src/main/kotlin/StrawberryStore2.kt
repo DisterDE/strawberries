@@ -19,7 +19,7 @@ class StrawberryStore2 {
         for (bill in bills) {
 
             require(bill in allowedBills) {
-                throw IllegalArgumentException("Wrong bill: $bill, only 5, 10 and 20 Euro allowed")
+                throw IllegalArgumentException("Wrong bill: $bill, only $allowedBills Euro allowed")
             }
 
             val bankIndex = bill / 10
