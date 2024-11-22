@@ -16,8 +16,8 @@ class StrawberryStore2 {
 
     fun buy(bills: IntArray): Boolean {
         require(bills.isNotEmpty()) { "No bills" }
-        for (bill in bills) {
 
+        for (bill in bills) {
             require(bill in allowedBills) {
                 throw IllegalArgumentException("Wrong bill: $bill, only $allowedBills Euro allowed")
             }
@@ -25,12 +25,11 @@ class StrawberryStore2 {
             bank[bill / 10]++
 
             var change = bill - PRICE
-
             if (change == 0) continue
 
             if (change > 10 && bank[1] > 0) {
                 bank[1]--
-                change %= 10
+                change -= 10
             }
 
             val fives = change / 5
