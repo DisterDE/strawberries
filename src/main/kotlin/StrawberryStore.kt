@@ -6,7 +6,7 @@ fun main() {
     val res3 = StrawberryStore().buy(intArrayOf(5, 5, 10, 10, 20))
     println(res) // true
     println(res2) // false
-    println(res3) //false
+    println(res3) // false
 }
 
 
