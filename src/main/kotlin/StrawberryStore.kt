@@ -1,4 +1,3 @@
-import kotlin.collections.sortedSetOf
 import kotlin.math.min
 
 fun main() {
@@ -11,22 +10,23 @@ fun main() {
 }
 
 
-class StrawberryStore {
-    private val bank = BILLS.associateTo(mutableMapOf()) { it to 0 }
+class StrawberryStore(allowedBills: IntArray = intArrayOf(5, 10, 20)) {
+    private val decreasingBills = allowedBills.toSortedSet().reversed()
+    private val bank = allowedBills.associateTo(mutableMapOf()) { it to 0 }
 
     fun buy(bills: IntArray): Boolean {
         require(bills.isNotEmpty()) { "No bills" }
         for (bill in bills) {
-            require(bill in BILLS) { "Wrong bill: $bill, only $BILLS Euro allowed" }
+            require(bill in bank) { "Wrong bill: $bill, only ${bank.keys} Euro allowed" }
 
             bank[bill] = bank[bill]!! + 1
 
             var change = bill - PRICE
             if (change == 0) continue
 
-            val debitBills = IntArray(BILLS.size)
+            val debitBills = IntArray(bank.size)
 
-            for((i, currBill) in BILLS.withIndex()) {
+            for ((i, currBill) in decreasingBills.withIndex()) {
                 if (change >= currBill) {
                     val min = min(bank[currBill]!!, change / currBill)
                     change -= currBill * min
@@ -37,7 +37,7 @@ class StrawberryStore {
             }
             if (change > 0) return false
 
-            for((i, n) in BILLS.withIndex()) {
+            for ((i, n) in decreasingBills.withIndex()) {
                 bank[n] = bank[n]!! - debitBills[i]
             }
         }
@@ -46,7 +46,6 @@ class StrawberryStore {
 
     companion object {
         private const val PRICE = 5
-        private val BILLS = sortedSetOf(Comparator.reverseOrder<Int>(), 5, 10, 20)
     }
 }
 

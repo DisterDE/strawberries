@@ -11,7 +11,7 @@ class StrawberryStoreTest {
 
     @BeforeEach
     fun init() {
-        gs = StrawberryStore()
+        gs = StrawberryStore(ALLOWED_BILLS)
     }
 
     @Test
@@ -28,13 +28,21 @@ class StrawberryStoreTest {
 
     @Test
     fun `should throw an exception when wrong amount`() {
-        assertThrows<IllegalArgumentException> { gs.buy(intArrayOf(5, 10, 5, 50)) }.message?.let {
-        }
+        val bill = 50
+        val e = assertThrows<IllegalArgumentException> { gs.buy(intArrayOf(bill)) }
+        assertEquals(
+            "Wrong bill: $bill, only ${ALLOWED_BILLS.joinToString(prefix = "[", postfix = "]")} Euro allowed",
+            e.message
+        )
     }
 
     @Test
     fun `should throw an exception when array is empty`() {
-        val e = assertThrows<IllegalArgumentException> { gs.buy(intArrayOf(5, 10, 5, 50)) }
+        val e = assertThrows<IllegalArgumentException> { gs.buy(intArrayOf()) }
         assertEquals("No bills", e.message)
+    }
+
+    companion object {
+        private val ALLOWED_BILLS = intArrayOf(5, 10, 20)
     }
 }
