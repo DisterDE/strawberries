@@ -24,13 +24,13 @@ class StrawberryStore {
             var change = bill - PRICE
             if (change == 0) continue
 
-            val temp = IntArray(BILLS.size)
+            val debitBills = IntArray(BILLS.size)
 
-            for((i, n) in BILLS.withIndex()) {
-                if (change >= n) {
-                    val min = min(bank[n]!!, change / n)
-                    change -= n * min
-                    temp[i] = min
+            for((i, currBill) in BILLS.withIndex()) {
+                if (change >= currBill) {
+                    val min = min(bank[currBill]!!, change / currBill)
+                    change -= currBill * min
+                    debitBills[i] = min
                 }
 
                 if (change == 0) break
@@ -38,7 +38,7 @@ class StrawberryStore {
             if (change > 0) return false
 
             for((i, n) in BILLS.withIndex()) {
-                bank[n] = bank[n]!! - temp[i]
+                bank[n] = bank[n]!! - debitBills[i]
             }
         }
         return true
