@@ -11,6 +11,10 @@ fun main() {
 
 
 class StrawberryStore2 {
+    // YAGNI says
+    // that we don't need
+    // to keep the balance of the 20s because they are not needed in the calculations,
+    // but I'm not sure if you want me to remove them
     private val bank = IntArray(3)
     private val allowedBills = setOf(5, 10, 20)
 
