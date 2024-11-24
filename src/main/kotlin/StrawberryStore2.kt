@@ -22,9 +22,7 @@ class StrawberryStore2 {
         require(bills.isNotEmpty()) { "No bills" }
 
         for (bill in bills) {
-            require(bill in allowedBills) {
-                throw IllegalArgumentException("Wrong bill: $bill, only $allowedBills Euro allowed")
-            }
+            require(bill in allowedBills) { "Wrong bill: $bill, only $allowedBills Euro allowed" }
 
             bank[bill / 10]++
 
